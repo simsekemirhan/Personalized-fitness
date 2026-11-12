@@ -4,7 +4,43 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#0A0E17" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Emirhan Fit" />
+<meta name="application-name" content="Emirhan Fit" />
+<meta name="description" content="Emirhan için kişisel fitness, beslenme, kardiyo ve program komuta merkezi. Çevrimdışı çalışan mobil uygulama." />
+<link rel="manifest" href="manifest.webmanifest" id="pwaManifest" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
 <title>Emirhan · Fitness Komuta Merkezi</title>
+<noscript><style>#pwaSplash{display:none!important}</style></noscript>
+<script>
+  /* Kurulum istemi, ana script yüklenmeden önce yakalanır. */
+  window.__deferredInstall = null;
+  window.__pwaInstalled = false;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    window.__deferredInstall = e;
+    document.documentElement.classList.add('pwa-can-install');
+  });
+  window.addEventListener('appinstalled', function () {
+    window.__deferredInstall = null;
+    window.__pwaInstalled = true;
+    document.documentElement.classList.add('pwa-installed');
+    if (window.onPwaInstalled) { try { window.onPwaInstalled(); } catch (err) {} }
+  });
+  try {
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+      document.documentElement.classList.add('pwa-standalone');
+    }
+  } catch (e) {}
+  /* Açılış ekranı her durumda kapanır */
+  setTimeout(function () {
+    var s = document.getElementById('pwaSplash');
+    if (s) { s.classList.add('hide'); setTimeout(function () { try { s.remove(); } catch (e) {} }, 600); }
+  }, 2600);
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1051,6 +1087,151 @@
   .vision-loading-bar{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#A97CFF,#4D9FFF,#2BD9C4);animation:visionLoad 1.1s ease-in-out infinite alternate}
   @keyframes visionLoad{from{width:34%}to{width:92%}}
 
+  /* ---------- Mobil uygulama (PWA) ---------- */
+  .pwa-top-btn{color:#9EF2CC;border-color:rgba(47,224,141,.26);background:rgba(47,224,141,.09)}
+  .pwa-top-btn:hover{background:rgba(47,224,141,.16)}
+  .pwa-hero{position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(255,255,255,.12);background:radial-gradient(110% 130% at 90% 0%,rgba(169,124,255,.25),transparent 60%),radial-gradient(90% 120% at 0% 100%,rgba(255,158,76,.16),transparent 62%),linear-gradient(155deg,#1A2440,#0F1626);padding:22px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:20px;align-items:center}
+  .pwa-hero::after{content:"";position:absolute;right:-70px;top:-90px;width:240px;height:240px;border-radius:99px;border:1px solid rgba(255,255,255,.11);pointer-events:none}
+  .pwa-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;font-size:8.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:rgba(47,224,141,.12);border:1px solid rgba(47,224,141,.32);color:#9EF2CC}
+  .pwa-eyebrow svg{width:12px;height:12px;max-width:none;max-height:none;flex:0 0 auto}
+  .pwa-guide-note svg{width:12px;height:12px;max-width:none;max-height:none;display:inline-block;vertical-align:-2px;margin-right:3px;flex:0 0 auto}
+  .pwa-final svg{max-width:18px;max-height:18px}
+  .pwa-hero .phone-frame svg{max-width:none;max-height:none}
+  .pwa-title{font-family:var(--display);font-size:clamp(24px,3.4vw,36px);font-weight:800;letter-spacing:-.05em;line-height:1.06;margin:11px 0 0;color:#fff}
+  .pwa-title em{font-style:normal;background:linear-gradient(135deg,#FFD166,#FF8A6B 48%,#C9B0FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pwa-sub{font-size:11.5px;line-height:1.7;color:#BCC8DB;margin:9px 0 0;max-width:520px}
+  .pwa-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;min-width:0}
+  .pwa-actions>*{max-width:100%}
+  .pwa-install-btn{height:46px;padding:0 20px;border-radius:13px;font-size:13px;font-weight:800;background:linear-gradient(135deg,#FF7A5C,#FFC93C);color:#231313;box-shadow:0 12px 28px rgba(255,122,92,.3),inset 0 1px 0 rgba(255,255,255,.35);display:inline-flex;align-items:center;gap:8px;border:0}
+  .pwa-install-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .pwa-install-btn:active{transform:scale(.985)}
+  .pwa-install-btn svg{width:18px;height:18px;max-width:none}
+  .pwa-install-btn.installed{background:rgba(47,224,141,.14);color:#9EF2CC;border:1px solid rgba(47,224,141,.36);box-shadow:none}
+  .pwa-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+  .pwa-badges span{display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border-radius:7px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.1);font-size:8.5px;font-weight:700;color:#C9D5E6}
+  .pwa-badges svg{width:11px;height:11px;max-width:none;color:#9EF2CC}
+  .phone-frame{position:relative;width:100%;max-width:238px;margin:0 auto;aspect-ratio:9/18.4;border-radius:30px;padding:9px;background:linear-gradient(155deg,#33415E,#131B2C 42%,#0B111D);border:1px solid rgba(255,255,255,.22);box-shadow:0 34px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.26);transform:rotate(-3deg)}
+  .phone-frame::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:66px;height:16px;border-radius:0 0 12px 12px;background:#0A0F18;z-index:3}
+  .phone-screen{position:relative;height:100%;border-radius:23px;overflow:hidden;background:#0A0E17;display:flex;flex-direction:column}
+  .phone-status{display:flex;align-items:center;justify-content:space-between;padding:9px 13px 3px;font-size:7px;font-weight:800;color:#CBD6E8}
+  .phone-appbar{display:flex;align-items:center;gap:6px;padding:7px 11px 4px}
+  .phone-logo{width:19px;height:19px;border-radius:6px;background:linear-gradient(135deg,#FF7A5C,#FFC93C);display:grid;place-items:center;color:#241313}
+  .phone-logo svg{width:11px;height:11px;max-width:none}
+  .phone-appbar b{font-family:var(--display);font-size:8.5px;letter-spacing:.06em;color:#fff}
+  .phone-appbar span{margin-left:auto;font-size:6px;color:#7E8DA5;font-weight:700}
+  .phone-body{padding:6px 9px;display:flex;flex-direction:column;gap:6px;flex:1;min-height:0}
+  .phone-brief{border-radius:10px;padding:9px;background:radial-gradient(100% 130% at 100% 0%,rgba(255,158,76,.32),transparent 62%),linear-gradient(150deg,#1C2640,#141C2D);border:1px solid rgba(255,255,255,.1)}
+  .phone-brief .lbl{font-size:5.5px;letter-spacing:.1em;color:#9DACC2;font-weight:800}
+  .phone-brief b{display:block;font-family:var(--display);font-size:9px;line-height:1.25;color:#fff;margin-top:2px}
+  .phone-brief p{font-size:5.5px;color:#AEBBCE;margin:4px 0 0;line-height:1.45}
+  .phone-kcal{display:flex;align-items:center;gap:7px;padding:7px;border-radius:9px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+  .phone-ring{width:32px;height:32px;border-radius:99px;background:conic-gradient(#FFC93C 0 62%,rgba(255,255,255,.12) 62% 100%);display:grid;place-items:center;flex:0 0 auto}
+  .phone-ring i{width:24px;height:24px;border-radius:99px;background:#101826;display:grid;place-items:center;font-size:5.5px;font-weight:800;color:#FFD166;font-style:normal}
+  .phone-kcal .nm{font-size:6px;color:#93A3BA;font-weight:700;line-height:1.5}
+  .phone-kcal .nm b{display:block;font-size:7.5px;color:#fff}
+  .phone-rows{display:flex;flex-direction:column;gap:4px}
+  .phone-row{display:flex;align-items:center;gap:5px;padding:5px 6px;border-radius:6px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}
+  .phone-row i{width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-style:normal;font-size:6px}
+  .phone-row .t{font-size:5.5px;font-weight:700;color:#DDE6F3;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .phone-row .v{font-size:5.5px;font-weight:800;color:#FFD166}
+  .phone-nav{display:flex;justify-content:space-around;padding:7px 6px 10px;border-top:1px solid rgba(255,255,255,.08);background:rgba(8,13,22,.9)}
+  .phone-nav i{width:16px;height:3px;border-radius:99px;background:rgba(255,255,255,.16);display:block}
+  .phone-nav i.on{background:linear-gradient(90deg,#FF9E4C,#FFC93C);box-shadow:0 0 7px rgba(255,180,90,.5)}
+  .pwa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+  .pwa-steps{display:flex;flex-direction:column;gap:8px}
+  .pwa-step{display:flex;gap:10px;padding:11px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.028)}
+  .pwa-step .n{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#A97CFF,#4D9FFF);color:#fff;display:grid;place-items:center;font-family:var(--display);font-size:10px;font-weight:800;flex:0 0 auto}
+  .pwa-step b{display:block;font-size:11px;color:var(--text);font-weight:800}
+  .pwa-step span{display:block;font-size:9.5px;line-height:1.6;color:var(--dim);margin-top:2px}
+  .pwa-step code{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:1px 4px;border-radius:4px;font-size:9px;color:#E3EAF6}
+  .pwa-feature{display:flex;align-items:flex-start;gap:9px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.055)}
+  .pwa-feature:last-child{border-bottom:0}
+  .pwa-feature .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;background:rgba(47,224,141,.1);color:#5BE7A8;border:1px solid rgba(47,224,141,.2)}
+  .pwa-feature .ic svg{width:15px;height:15px;max-width:none}
+  .pwa-feature b{display:block;font-size:11px;font-weight:800;color:var(--text-2)}
+  .pwa-feature span{display:block;font-size:9px;line-height:1.55;color:var(--dim);margin-top:2px}
+  .pwa-status-row{display:flex;align-items:center;gap:7px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:10px;color:var(--muted)}
+  .pwa-status-row:last-child{border-bottom:0}
+  .pwa-status-row b{margin-left:auto;color:var(--text-2);font-size:10px;text-align:right;max-width:58%}
+  .pwa-status-row svg{width:14px;height:14px;flex:0 0 auto;color:#8FA0B9;max-width:none}
+  .pwa-dot{width:6px;height:6px;border-radius:99px;flex:0 0 auto}
+  .pwa-dot.ok{background:#2FE08D;box-shadow:0 0 8px rgba(47,224,141,.8)}
+  .pwa-dot.warn{background:#FFC93C;box-shadow:0 0 8px rgba(255,201,60,.7)}
+  .pwa-dot.off{background:#FF5C6C;box-shadow:0 0 8px rgba(255,92,108,.7)}
+  .pwa-guide-note{padding:11px 12px;border-radius:11px;border:1px solid rgba(255,201,60,.22);background:rgba(255,201,60,.06);font-size:9.5px;line-height:1.65;color:#D8D2BF}
+  .pwa-guide-note b{color:#FFD166}
+  .pwa-qr{width:104px;height:104px;border-radius:12px;background:#fff;padding:7px;flex:0 0 auto;display:grid;place-items:center}
+  .pwa-qr svg{width:100%;height:100%;max-width:none}
+  .pwa-share-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .pwa-share-row .link{font-size:9px;color:var(--dim);word-break:break-all;line-height:1.5;flex:1;min-width:150px}
+  .pwa-final{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border-radius:15px;border:1px solid rgba(47,224,141,.24);background:linear-gradient(130deg,rgba(47,224,141,.1),rgba(77,159,255,.06));min-width:0}
+  .pwa-final>div{min-width:0}
+  .pwa-final .btn{flex:0 0 auto}
+  .pwa-final .ico{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#2FE08D,#2BD9C4);display:grid;place-items:center;color:#08231a;flex:0 0 auto}
+  .pwa-final .ico svg{width:20px;height:20px;max-width:none}
+  .pwa-final b{display:block;font-family:var(--display);font-size:12.5px;color:#fff}
+  .pwa-final span{display:block;font-size:9.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+  #pwaSplash{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(90% 60% at 50% 0%,rgba(255,158,76,.18),transparent 60%),#0A0E17;transition:opacity .4s ease,visibility .4s ease}
+  #pwaSplash.hide{opacity:0;visibility:hidden;pointer-events:none}
+  .splash-logo{width:84px;height:84px;border-radius:24px;background:linear-gradient(150deg,#FF5C6C,#FF9E4C 55%,#FFC93C);display:grid;place-items:center;color:#241313;box-shadow:0 20px 46px rgba(255,122,92,.34);animation:splashPop .6s cubic-bezier(.22,1,.36,1) both}
+  .splash-logo svg{width:44px;height:44px;max-width:none}
+  @keyframes splashPop{from{opacity:0;transform:scale(.86) translateY(8px)}to{opacity:1;transform:none}}
+  .splash-name{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:.14em;color:#fff;animation:splashPop .6s .08s cubic-bezier(.22,1,.36,1) both}
+  .splash-tag{font-size:9px;letter-spacing:.22em;color:#8B9AB2;font-weight:800;animation:splashPop .6s .14s cubic-bezier(.22,1,.36,1) both}
+  .splash-bar{width:120px;height:3px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:8px}
+  .splash-bar i{display:block;height:100%;width:40%;border-radius:99px;background:linear-gradient(90deg,#FF7A5C,#FFC93C);animation:splashLoad 1s ease-in-out infinite alternate}
+  @keyframes splashLoad{from{width:22%;margin-left:0}to{width:62%;margin-left:38%}}
+  .install-banner{position:fixed;left:12px;right:12px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:70;display:none;align-items:center;gap:9px;padding:10px;border-radius:16px;border:1px solid rgba(47,224,141,.3);background:linear-gradient(135deg,rgba(20,44,52,.98),rgba(19,28,46,.98));box-shadow:0 20px 46px rgba(0,0,0,.55);backdrop-filter:blur(16px)}
+  .install-banner.show{display:flex;animation:popIn .3s ease both}
+  .install-banner .ib-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;background:linear-gradient(135deg,#FF7A5C,#FFC93C);color:#241313}
+  .install-banner .ib-ico svg{width:19px;height:19px;max-width:none}
+  .install-banner .ib-body{flex:1;min-width:0}
+  .install-banner .ib-body b{display:block;font-size:10.5px;color:#fff;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .install-banner .ib-body span{display:block;font-size:8.5px;color:#AFC0D6;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .install-banner .ib-go{flex:0 0 auto;height:32px;padding:0 10px;border-radius:9px;border:0;background:linear-gradient(135deg,#2FE08D,#2BD9C4);color:#06251d;font-size:10px;font-weight:800}
+  .install-banner .ib-x{flex:0 0 auto;width:24px;height:24px;border:0;background:transparent;color:#7F8DA6;display:grid;place-items:center}
+  .install-banner .ib-x svg{width:13px;height:13px;max-width:none}
+  .pwa-standalone .install-banner{display:none!important}
+  .pwa-standalone .pwa-top-btn{display:none}
+  .pwa-standalone .app-main{padding-top:20px}
+  @media (min-width:1025px){.install-banner{display:none!important}}
+  @media (max-width:400px){
+    .topbar{padding:10px 11px;gap:6px}
+    .top-actions{gap:4px}
+    .top-actions .kcal-pill{padding:0 7px}
+    .top-actions .kcal-pill span{font-size:9px}
+    .pwa-top-btn{width:32px;height:32px}
+    .mobile-brand .brand-mark{width:29px;height:29px;border-radius:9px}
+    .mobile-brand #mobileDate{font-size:9.5px}
+    .pwa-title{font-size:24px}
+    .pwa-hero{padding:15px}
+    .pwa-install-btn{font-size:11.5px}
+    .phone-frame{max-width:184px}
+    .pwa-status-row{font-size:9.5px}
+    .pwa-status-row b{max-width:56%;font-size:9.5px}
+  }
+  @media (max-width:340px){
+    .mobile-brand > div:last-child{display:none}
+    .top-actions .kcal-pill{display:none}
+  }
+  @media (max-width:1024px){
+    .pwa-top-btn span{display:none}
+    .pwa-top-btn{width:36px;padding:0;justify-content:center}
+  }
+  @media (max-width:720px){
+    .pwa-hero{grid-template-columns:1fr;padding:17px;gap:16px;text-align:left}
+    .pwa-title{font-size:27px}
+    .pwa-sub{font-size:10.5px}
+    .pwa-actions{display:grid;grid-template-columns:1fr auto;width:100%}
+    .pwa-install-btn{width:100%;justify-content:center;height:44px;font-size:12px}
+    .pwa-actions .btn{height:44px}
+    .pwa-grid{grid-template-columns:1fr}
+    .phone-frame{max-width:200px;transform:none}
+    .pwa-badges span{font-size:8px}
+    .pwa-step{padding:10px}
+    .pwa-final{padding:12px}
+  }
+
   /* ---------- Premium yüzey & başlık yenilemesi ---------- */
   body::before{background:radial-gradient(900px 520px at 8% -8%,rgba(255,92,122,.14),transparent 64%),radial-gradient(820px 500px at 98% 8%,rgba(169,124,255,.13),transparent 66%),radial-gradient(760px 540px at 50% 112%,rgba(43,217,196,.1),transparent 68%),#0A0E17}
   .app-main{padding-top:28px}
@@ -1296,6 +1477,10 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.8 4.6L18 9.5l-4.2 1.9L12 16l-1.8-4.6L6 9.5l4.2-1.9L12 3Z"/><path d="M19 15l.9 2.2 2.1.8-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.8L19 15Z"/></svg>
     AI Koç <span class="chip" style="font-size:7.5px;padding:2px 5px;color:#5BE7A8;border-color:rgba(47,224,141,.3);background:rgba(47,224,141,.1);margin-left:auto">YENİ</span>
   </button>
+  <button class="nav-item" data-tab="app">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M10 18h4"/><path d="M12 5v6M9 8l3 3 3-3"/></svg>
+    Mobil Uygulama <span class="nav-dot" style="--mc:#2FE08D"></span>
+  </button>
 
   <div class="nav-label">KİŞİSEL</div>
   <button class="nav-item" data-tab="settings">
@@ -1345,6 +1530,10 @@
         <span id="topProgram">Program</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
+      <button class="pill-btn pwa-top-btn" onclick="goTab('app')" title="Mobil uygulamayı yükle" id="topInstallBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+        <span>Uygulamayı İndir</span>
+      </button>
       <button class="pill-btn kcal-pill" onclick="goTab('nutrition')" title="Kalan kalori">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 4 4 5.5 4 9.5A4 4 0 0 1 12 16a4 4 0 0 1-4-4.5C8 7.5 11 6 12 2Z"/><path d="M12 22c3.5 0 6-2 6-5.5 0-2-1-3.5-2-5"/><path d="M12 22c-3.5 0-6-2-6-5.5 0-1.2.4-2.3 1-3.2"/></svg>
         <span id="topKcal">1250 kcal</span>
@@ -1360,12 +1549,13 @@
     <section class="page" id="page-cardio" aria-label="Kardiyo"></section>
     <section class="page" id="page-programs" aria-label="Programlar"></section>
     <section class="page" id="page-ai" aria-label="AI Koç"></section>
+    <section class="page" id="page-app" aria-label="Mobil Uygulama"></section>
     <section class="page" id="page-settings" aria-label="Ayarlar"></section>
   </main>
 
   <footer class="app-footer">
-    <span>Emirhan · Kişisel Fitness Komuta Merkezi</span>
-    <span>Tamamen çevrimdışı · Veriler tarayıcında güvende</span>
+    <span>Emirhan Fit · Mobil Uygulama Sürümü</span>
+    <span>Çevrimdışı çalışır · Veriler yalnızca cihazında</span>
   </footer>
 </div>
 
@@ -1408,6 +1598,22 @@
 <div class="toast" id="toast">
   <span class="t-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
   <span id="toastMsg">Kaydedildi</span>
+</div>
+
+<div class="install-banner" id="installBanner" role="complementary" aria-label="Mobil uygulama kurulumu">
+  <div class="ib-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></div>
+  <div class="ib-body"><b>Emirhan Fit'i telefonuna kur</b><span>Tam ekran açılır · internet olmadan çalışır</span></div>
+  <button class="ib-go" onclick="pwaInstall()">İndir</button>
+  <button class="ib-x" onclick="dismissInstallBanner()" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+</div>
+
+<div id="pwaSplash" aria-hidden="true">
+  <div class="splash-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3 8.5v7M17.5 6.5v11M21 8.5v7M6.5 12h11"/></svg>
+  </div>
+  <div class="splash-name">EMIRHAN</div>
+  <div class="splash-tag">FIT KOMUTA MERKEZİ</div>
+  <div class="splash-bar"><i></i></div>
 </div>
 
 <script>
@@ -2785,7 +2991,7 @@ function updateChrome(){
 }
 function goTab(tab){
   try {
-    const allowed = ['overview','workout','nutrition','cardio','programs','ai','settings'];
+    const allowed = ['overview','workout','nutrition','cardio','programs','ai','app','settings'];
     UI.tab = allowed.includes(tab) ? tab : 'overview';
     $$('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + UI.tab));
     updateChrome();
@@ -2801,6 +3007,7 @@ function renderCurrentTab(){
     else if (UI.tab === 'cardio') renderCardioV2();
     else if (UI.tab === 'programs') renderPrograms();
     else if (UI.tab === 'ai') renderAI();
+    else if (UI.tab === 'app') renderAppPage();
     else if (UI.tab === 'settings') renderSettings();
     updateChrome();
   } catch(e){
@@ -3004,6 +3211,7 @@ function renderOverview(){
       '<button class="btn btn-primary" onclick="openQuickAdd()">' + ic('plus') + ' Hızlı Ekle</button>'
     ) +
     dailyBriefingHTML() +
+    pwaMiniCardHTML() +
     '<div class="stat-grid">' +
       statCard(planCol, 'calendar', 'Bugünün Odağı', esc(plan.title), '', '<span class="dot" style="--mc:' + planCol + '"></span> ' + esc(program.short || program.name)) +
       statCard('#FFC93C', 'flame', 'Kalori Limiti', fmt(profile.calLimit), 'kcal', 'Alınan: <b style="color:var(--text-2)">' + fmt(budget.consumed) + ' kcal</b>') +
@@ -3084,10 +3292,11 @@ function renderOverview(){
 
       hydrationCardHTML() +
 
+      quickComboCardHTML() +
       '<div class="card card-pad" style="--mc:#FFA23A">' +
         '<div class="card-head"><h2 class="card-title" style="--mc:#FFA23A">' + ic('sparkles') + ' Hızlı İşlemler</h2></div>' +
         '<div class="quick-grid">' +
-          '<button class="quick" style="--mc:#FFC93C" onclick="openFoodPicker(\'ogle\')">' + ic('apple') + '<b>Besin Ekle</b><small>Porsiyonla hesapla</small></button>' +
+          '<button class="quick" style="--mc:#FFC93C" onclick="openFoodPicker(\'kahvalti\')">' + ic('sparkles') + '<b>Hızlı Seçim</b><small>Kahvaltı kombinasyonun</small></button>' +
           '<button class="quick" style="--mc:#4D9FFF" onclick="goTab(\'cardio\')">' + ic('flame') + '<b>Kardiyo</b><small>Treadmill kalori</small></button>' +
           '<button class="quick" style="--mc:#FF5C6C" onclick="openExercisePicker()">' + ic('dumbbell') + '<b>Hareket</b><small>Bugüne ekle</small></button>' +
           '<button class="quick" style="--mc:#2FE08D" onclick="openWeightModal()">' + ic('scale') + '<b>Kilo</b><small>Tartı kaydet</small></button>' +
@@ -6230,6 +6439,12 @@ function renderSettings(){
           '<div style="min-width:0"><div class="strong" style="font-size:12px">' + esc(getActiveProgram().name) + '</div><div class="tiny dim" style="margin-top:2px">' + esc(getActiveProgram().tag || 'Kişisel') + ' · ' + programExerciseCount(getActiveProgram()) + ' hareket</div></div></div>' +
         '<button class="btn btn-secondary btn-block mt-3" onclick="goTab(\'programs\')">' + ic('edit') + ' Programları Yönet</button>' +
       '</div>' +
+      '<div class="card card-pad" style="--mc:#2FE08D">' +
+        '<div class="card-head"><div><h2 class="card-title" style="--mc:#2FE08D">' + ic('download') + ' Mobil Uygulama</h2><p class="card-sub">Telefonuna kur · tam ekran · çevrimdışı çalışır</p></div><span class="chip chip-mc" style="--mc:#2FE08D">' + (pwaIsInstalled() ? 'YÜKLÜ' : 'ANDROID') + '</span></div>' +
+        '<div class="tiny dim" style="line-height:1.65">Emirhan Fit\'i Android telefonuna uygulama olarak yükle. Tarayıcı çubuğu olmadan açılır, ana ekranında simgesi olur ve internet olmadan da çalışır.</div>' +
+        '<button class="btn btn-primary btn-block mt-3" onclick="pwaInstall()">' + ic('download') + ' ' + (pwaIsInstalled() ? 'Uygulama Bilgisi' : 'Mobil Uygulamayı İndir') + '</button>' +
+        '<button class="btn btn-secondary btn-block mt-2" onclick="goTab(\'app\')">' + ic('info') + ' Kurulum Ekranı</button>' +
+      '</div>' +
       hydrationCardHTML() +
       '<div class="card card-pad" style="--mc:#2FE08D">' +
         '<div class="card-head"><div><h2 class="card-title" style="--mc:#2FE08D">' + ic('download') + ' JSON Yedekleme</h2><p class="card-sub">Cihazındaki tüm verileri tek dosyada güvenceye al.</p></div><span class="chip" style="color:#5BE7A8;border-color:rgba(47,224,141,.3)">' + (storageOK ? 'YEREL KAYIT AKTİF' : 'SINIRLI DEPOLAMA') + '</span></div>' +
@@ -6388,6 +6603,344 @@ function importBackupFile(input){
 }
 
 /* =========================================================
+   MOBİL UYGULAMA · PWA kurulum & çevrimdışı
+   ========================================================= */
+let swRegistration = null;
+let deferredInstallEvent = null;
+
+function syncDeferredInstallEvent(){
+  try {
+    if (window.__deferredInstall) deferredInstallEvent = window.__deferredInstall;
+    updatePwaButtons();
+  } catch(e){}
+}
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredInstallEvent = e;
+  window.__deferredInstall = e;
+  updatePwaButtons();
+  if (UI && UI.tab === 'app') renderAppPage();
+});
+window.addEventListener('appinstalled', function() {
+  deferredInstallEvent = null;
+  window.__deferredInstall = null;
+  window.__pwaInstalled = true;
+  updatePwaButtons();
+  try { toast('Emirhan Fit telefonuna yüklendi. Ana ekrandan açabilirsin.'); } catch(e){}
+  if (UI.tab === 'app' && typeof renderAppPage === 'function') renderAppPage();
+});
+
+function pwaIsInstalled(){
+  try {
+    if (window.__pwaInstalled) return true;
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+    if (window.matchMedia && window.matchMedia('(display-mode: fullscreen)').matches) return true;
+    if (window.navigator.standalone === true) return true;
+  } catch(e){}
+  return false;
+}
+function pwaPlatform(){
+  try {
+    const ua = navigator.userAgent || '';
+    if (/Android/i.test(ua)) return { key:'android', label:'Android', icon:'android' };
+    if (/iPhone|iPad|iPod/i.test(ua)) return { key:'ios', label:'iPhone / iPad', icon:'apple' };
+    if (/Windows/i.test(ua)) return { key:'desktop', label:'Windows', icon:'desktop' };
+    if (/Macintosh/i.test(ua)) return { key:'desktop', label:'macOS', icon:'desktop' };
+    return { key:'other', label:'Tarayıcı', icon:'desktop' };
+  } catch(e){ return { key:'other', label:'Tarayıcı', icon:'desktop' }; }
+}
+function pwaOnline(){ return (typeof navigator.onLine === 'boolean') ? navigator.onLine : true; }
+function pwaSwActive(){ return !!(navigator.serviceWorker && navigator.serviceWorker.controller); }
+function pwaSizeLabel(){
+  try { return Math.max(1, Math.round(JSON.stringify(state).length / 1024)) + ' KB'; } catch(e){ return '—'; }
+}
+function pwaInstall(){
+  try {
+    if (pwaIsInstalled()) {
+      toast('Uygulama zaten yüklü. Ana ekrandan "Emirhan Fit" simgesine dokunabilirsin.');
+      if (UI.tab !== 'app') goTab('app');
+      return;
+    }
+    const ev = deferredInstallEvent || window.__deferredInstall;
+    if (ev && typeof ev.prompt === 'function') {
+      const evRef = ev;
+      deferredInstallEvent = null;
+      window.__deferredInstall = null;
+      evRef.prompt();
+      if (evRef.userChoice && evRef.userChoice.then) {
+        evRef.userChoice.then(function(choice) {
+          if (choice && choice.outcome === 'accepted') {
+            toast('Kurulum başladı. Uygulama ana ekranına eklenecek.');
+          } else {
+            toast('Kurulum ertelendi. İstediğinde tekrar başlatabilirsin.');
+          }
+          updatePwaButtons();
+        }).catch(function(){ updatePwaButtons(); });
+      }
+    } else {
+      openInstallGuide();
+    }
+  } catch(e){
+    openInstallGuide();
+  }
+}
+function pwaMiniCardHTML(){
+  try {
+    if (pwaIsInstalled()) {
+      return '<div class="pwa-final mb-4" style="padding:12px 14px"><div class="ico">' + ic('check') + '</div><div style="flex:1;min-width:0"><b>Emirhan Fit uygulaması yüklü</b><span>Ana ekrandan tam ekran açılıyor · veriler cihazında</span></div><button class="btn btn-secondary btn-sm" onclick="goTab(\'app\')">' + ic('info') + ' Uygulama Bilgisi</button></div>';
+    }
+    const platform = pwaPlatform();
+    return '<div class="card card-pad card-sheen mb-4" style="border-color:rgba(47,224,141,.24);background:radial-gradient(110% 140% at 100% 0%,rgba(47,224,141,.14),transparent 62%),linear-gradient(160deg,#152033,#101827)">' +
+      '<div class="row wrap" style="gap:11px"><div class="pwa-feature" style="border:0;padding:0;flex:1;min-width:180px"><div class="ic" style="background:rgba(77,159,255,.12);border-color:rgba(77,159,255,.24);color:#79C8FF">' + ic('download') + '</div><div><b>Emirhan Fit\'i telefonuna kur</b><span>Android uygulaması gibi tam ekran açılır, çevrimdışı çalışır. Verilerin cihazında kalır.</span></div></div>' +
+      '<button class="btn btn-primary btn-sm" onclick="pwaInstall()" style="flex:0 0 auto">' + ic('download') + ' Uygulamayı İndir</button>' +
+      '<button class="btn btn-secondary btn-sm" onclick="goTab(\'app\')" style="flex:0 0 auto">Kurulum</button></div>' +
+      '<div class="pwa-badges" style="margin-top:10px"><span>' + ic('check') + ' Çevrimdışı</span><span>' + ic('check') + ' Tam ekran</span><span>' + ic('check') + ' ' + esc(platform.label) + '</span><span>' + ic('check') + ' Sunucusuz</span></div>' +
+    '</div>';
+  } catch(e){ return ''; }
+}
+function renderAppPage(){
+  const el = $('#page-app');
+  if (!el) return;
+  try {
+    const platform = pwaPlatform();
+    const installed = pwaIsInstalled();
+    const online = pwaOnline();
+    const pwaLink = (function(){ try { return location.origin + location.pathname; } catch(e){ return 'file:///index.html'; } })();
+    const registerChip = swRegistration ? 'Aktif / hazır' : ('serviceWorker' in navigator ? 'Kayıt deneniyor' : 'Desteklenmiyor');
+    const steps = platform.key === 'android'
+      ? [
+          { t:'Chrome ile aç', d:'Bu sayfa Android Chrome\'da açık olmalı. Adres çubuğunun sağındaki yükleme simgesine de dokunabilirsin.' },
+          { t:'“Uygulamayı İndir”e bas', d:'Yükleme istemi çıktığında <b style="color:var(--text-2)">Yükle</b> veya <b style="color:var(--text-2)">Ana ekrana ekle</b> seçeneğini onayla.' },
+          { t:'Simgeden aç', d:'Kurulumdan sonra ana ekranındaki <code>Emirhan Fit</code> simgesi tarayıcısız, tam ekran uygulama olarak açılır.' }
+        ]
+      : platform.key === 'ios'
+        ? [
+            { t:'Safari ile aç', d:'iPhone\'da kurulum için bu sayfayı Safari\'de açman gerekir.' },
+            { t:'Paylaş menüsünü kullan', d:'Alt menüdeki <b style="color:var(--text-2)">Paylaş</b> simgesine dokun.' },
+            { t:'Ana Ekrana Ekle', d:'Listeden <code>Ana Ekrana Ekle</code> seçeneğini seç ve <b style="color:var(--text-2)">Ekle</b>\'ye dokun.' }
+          ]
+        : [
+            { t:'Uyumlu tarayıcı', d:'Kurulum için Android cihazlarda Chrome, masaüstünde Chrome/Edge kullanman önerilir.' },
+            { t:'Adrese git', d:'Telefonun tarayıcısında uygulamanın adresini aç. Adresi kopyalayıp telefonuna gönderebilirsin.' },
+            { t:'Yüklemeyi onayla', d:'Adres çubuğundaki yükleme simgesi veya “Uygulamayı İndir” düğmesiyle kur. Bundan sonra internet olmadan da açılır.' }
+          ];
+    el.innerHTML = pageHead(
+      '<span class="accent">Mobil</span> Uygulama',
+      'Emirhan Fit\'i telefonuna gerçek bir uygulama gibi kur. Tam ekran açılır, ana ekranda simgesi olur ve internet olmadan çalışır.',
+      '<button class="btn btn-secondary" onclick="pwaUpdate()">' + ic('refresh') + ' Güncellemeyi Denetle</button>' +
+      '<button class="btn btn-primary pwa-install-btn" style="height:39px;padding:0 14px;font-size:12px" onclick="pwaInstall()">' + ic('download') + ' Mobil Uygulamayı İndir</button>'
+    ) +
+    '<div class="pwa-hero mb-4">' +
+      '<div style="position:relative;z-index:1">' +
+        '<span class="pwa-eyebrow">' + (installed ? ic('check') + ' YÜKLÜ UYGULAMA' : ic('sparkles') + ' ANDROID · KURULABİLİR') + '</span>' +
+        '<h2 class="pwa-title">Cebinde tam bir <em>komuta merkezi.</em></h2>' +
+        '<p class="pwa-sub">Tarayıcı çubuğu yok, bekleme yok. Antrenman setlerini onayla, öğününü kaydet, kardiyo hesapla. Tüm veriler telefonunda kalır; internet kesilse bile çalışır.</p>' +
+        '<div class="pwa-badges"><span>' + ic('check') + ' Tam ekran uygulama</span><span>' + ic('check') + ' Çevrimdışı</span><span>' + ic('check') + ' Ana ekran simgesi</span><span>' + ic('check') + ' Veriler cihazda</span></div>' +
+        '<div class="pwa-actions"><button class="btn pwa-install-btn ' + (installed ? 'installed' : '') + '" onclick="pwaInstall()">' + ic(installed ? 'check' : 'download') + ' ' + (installed ? 'Uygulama Yüklü' : 'Uygulamayı İndir') + '</button>' +
+          '<button class="btn btn-secondary" onclick="openInstallGuide()">' + ic('info') + ' Kurulum Adımları</button>' +
+          '<button class="btn btn-secondary" onclick="exportData()">' + ic('save') + ' Yedek Al</button></div>' +
+      '</div>' +
+      phoneMockHTML() +
+    '</div>' +
+    '<div class="pwa-grid mb-4">' +
+      '<div class="card card-pad" style="--mc:#4D9FFF">' +
+        '<div class="card-head"><div><h2 class="card-title" style="--mc:#4D9FFF">' + ic('download') + ' ' + (platform.key === 'android' ? 'Android\'e Kurulum' : 'Kurulum') + '</h2><p class="card-sub">3 adımda uygulama olarak yükle</p></div><span class="chip chip-mc" style="--mc:#4D9FFF">' + esc(platform.label) + '</span></div>' +
+        '<div class="pwa-steps">' + steps.map(function(s, i) {
+          return '<div class="pwa-step"><span class="n">' + (i+1) + '</span><div><b>' + esc(s.t) + '</b><span>' + s.d + '</span></div></div>';
+        }).join('') + '</div>' +
+        '<div class="pwa-actions" style="margin-top:11px"><button class="btn pwa-install-btn" style="width:100%;justify-content:center" onclick="pwaInstall()">' + ic(installed ? 'check' : 'download') + ' ' + (installed ? 'Ana ekrandan aç' : 'Uygulamayı İndir') + '</button></div>' +
+        '<div class="pwa-guide-note mt-3">' + ic('info') + ' <b>İndirme istemi görünmezse:</b> Chrome menüsünden <b>“Uygulamayı yükle”</b> veya <b>“Ana ekrana ekle”</b> seçeneğini kullan. Bazı tarayıcılarda kurulum 2-3 saniye sürer.</div>' +
+        '<div class="pwa-guide-note mt-2" style="border-color:rgba(77,159,255,.22);background:rgba(77,159,255,.06);color:#C9D9EA">' + ic('lock') + ' <b>Kurulum biçimi:</b> Android’in resmî PWA kurulumu kullanılır. Play Store veya ayrı bir .apk dosyası gerekmez; Chrome uygulamayı ana ekrana gerçek bir uygulama gibi kurar ve tam ekran açar.</div>' +
+      '</div>' +
+      '<div class="card card-pad" style="--mc:#2FE08D">' +
+        '<div class="card-head"><div><h2 class="card-title" style="--mc:#2FE08D">' + ic('info') + ' Uygulama Durumu</h2><p class="card-sub">Cihaz, ağ ve veri durumu</p></div><span class="chip" style="color:' + (installed ? '#9EF2CC' : '#FFD166') + ';border-color:' + (installed ? 'rgba(47,224,141,.3)' : 'rgba(255,201,60,.3)') + '"><span class="pwa-dot ' + (installed ? 'ok' : 'warn') + '"></span>' + (installed ? ' YÜKLÜ' : ' TARAYICI MODU') + '</span></div>' +
+        '<div class="pwa-status-row">' + ic('checkCircle') + ' Kurulum durumu <b>' + (installed ? 'Uygulama olarak açık' : (deferredInstallEvent ? 'Kuruluma hazır' : 'Tarayıcı sekmesinde')) + '</b></div>' +
+        '<div class="pwa-status-row">' + ic('download') + ' Çevrimdışı motoru <b>' + registerChip + '</b></div>' +
+        '<div class="pwa-status-row">' + ic('flame') + ' Bağlantı <b style="color:' + (online ? '#5BE7A8' : '#FF9AA5') + '"><span class="pwa-dot ' + (online ? 'ok' : 'off') + '" style="display:inline-block;margin-right:4px"></span>' + (online ? 'Çevrimiçi' : 'Çevrimdışı · kayıtlar yerel') + '</b></div>' +
+        '<div class="pwa-status-row">' + ic('layers') + ' Cihaz <b>' + esc(platform.label) + '</b></div>' +
+        '<div class="pwa-status-row">' + ic('save') + ' Yerel veri boyutu <b>' + pwaSizeLabel() + '</b></div>' +
+        '<div class="pwa-status-row">' + ic('lock') + ' Veritabanı <b>Yalnızca localStorage</b></div>' +
+        '<div class="pwa-status-row">' + ic('sparkles') + ' Sürüm <b>v3 · PWA</b></div>' +
+        '<div class="row wrap mt-3" style="gap:6px"><button class="btn btn-secondary btn-sm" onclick="pwaUpdate()">' + ic('refresh') + ' Güncelle</button><button class="btn btn-secondary btn-sm" onclick="goTab(\'settings\')">' + ic('save') + ' Yedekleme</button><button class="btn btn-secondary btn-sm" onclick="copyAppLink()">' + ic('copy') + ' Bağlantıyı Kopyala</button></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="pwa-grid mb-4">' +
+      '<div class="card card-pad" style="--mc:#A97CFF">' +
+        '<div class="card-head"><h2 class="card-title" style="--mc:#A97CFF">' + ic('sparkles') + ' Uygulama Özellikleri</h2><span class="chip">Tam sürüm</span></div>' +
+        '<div class="pwa-feature"><div class="ic">' + ic('dumbbell') + '</div><div><b>Set set antrenman onayı</b><span>Her seti ayrı işaretle; eksik sette güvenlik uyarısı.</span></div></div>' +
+        '<div class="pwa-feature"><div class="ic">' + ic('apple') + '</div><div><b>' + FOODS.length + '+ besin ve hızlı seçim</b><span>Sık kahvaltı kombinasyonun otomatik öğrenilir.</span></div></div>' +
+        '<div class="pwa-feature"><div class="ic">' + ic('flame') + '</div><div><b>Kardiyo & kalori bütçesi</b><span>ACSM/MET hesabı, net bütçe ve 22:00 kapanış raporu.</span></div></div>' +
+        '<div class="pwa-feature"><div class="ic">' + ic('drop') + '</div><div><b>Litre bazlı su takibi</b><span>250 ml adımlarla günlük hedef ve haftalık grafik.</span></div></div>' +
+        '<div class="pwa-feature"><div class="ic">' + ic('download') + '</div><div><b>JSON yedek</b><span>Telefonuna indir, istediğinde geri yükle.</span></div></div>' +
+      '</div>' +
+      '<div class="card card-pad" style="--mc:#FFC93C">' +
+        '<div class="card-head"><h2 class="card-title" style="--mc:#FFC93C">' + ic('lock') + ' Veri & Gizlilik</h2><span class="chip chip-mc" style="--mc:#FFC93C">Sunucusuz</span></div>' +
+        '<div class="tiny dim" style="line-height:1.75">Bu uygulama <b style="color:var(--text-2)">Supabase, Firebase, MySQL veya başka bir harici veritabanı kullanmaz</b>. Profil, besin, antrenman, kardiyo, su, kilo ve ayarlar telefonunun tarayıcısında <b style="color:var(--text-2)">localStorage</b> alanında JSON olarak tutulur. Uygulama kapatılsa bile kayıtlar korunur.</div>' +
+        '<div class="pwa-share-row mt-3"><div class="pwa-qr">' + qrLikeHTML() + '</div><div class="link"><b style="color:var(--text-2);font-size:10px">Uygulama bağlantısı</b><br>' + esc(pwaLink) + '</div></div>' +
+        '<div class="row wrap mt-2" style="gap:6px"><button class="btn btn-secondary btn-sm" onclick="copyAppLink()">' + ic('copy') + ' Kopyala</button><button class="btn btn-secondary btn-sm" onclick="exportData()">' + ic('download') + ' Yedek İndir</button><button class="btn btn-secondary btn-sm" onclick="pickBackupFile()">' + ic('refresh') + ' Yedeği Yükle</button></div>' +
+        '<div class="pwa-guide-note mt-3">' + ic('info') + ' <b>Önemli:</b> Uygulamayı silmek veya tarayıcı verilerini temizlemek yerel kayıtları da siler. Düzenli <b>JSON yedeği</b> almanı öneririm.</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="pwa-final"><div class="ico">' + ic('trophy') + '</div><div style="flex:1;min-width:170px"><b>Hedef 100 kg · uygulama hazır</b><span>Telefonunda tam ekran, çevrimdışı ve hızlı. Bugünün antrenmanı set onaylarını bekliyor.</span></div><button class="btn btn-primary btn-sm" onclick="goTab(\'overview\')">' + ic('play') + ' Komuta Merkezine Dön</button></div>';
+    updatePwaButtons();
+  } catch(e) {
+    el.innerHTML = pageHead('Mobil Uygulama', 'Kurulum ekranı') + '<div class="card card-pad"><div class="empty">' + ic('alert') + '<h4>Kurulum ekranı yüklenemedi</h4><p>' + esc(e && e.message) + '</p><button class="btn btn-primary mt-3" onclick="renderAppPage()">Tekrar Dene</button></div></div>';
+  }
+}
+function phoneMockHTML(){
+  return '<div class="phone-frame"><div class="phone-screen">' +
+    '<div class="phone-status"><span>09:41</span><span>5G · %' + (state && state.profile ? '82' : '82') + '</span></div>' +
+    '<div class="phone-appbar"><span class="phone-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 6.5v11M3 8.5v7M17.5 6.5v11M21 8.5v7M6.5 12h11"/></svg></span><b>EMIRHAN FIT</b><span>PWA</span></div>' +
+    '<div class="phone-body">' +
+      '<div class="phone-brief"><div class="lbl">GÜNLÜK BRİFİNG</div><b>Hedefe 13 kg kaldı.</b><p>Bugünkü antrenman ve kalan kalori bütçen hazır.</p></div>' +
+      '<div class="phone-kcal"><div class="phone-ring"><i>%62</i></div><div class="nm">KALAN KALORİ<b>' + (state && state.profile ? fmt(budgetFor().remaining) : '475') + ' kcal</b></div></div>' +
+      '<div class="phone-rows">' +
+        '<div class="phone-row"><i>🍳</i><span class="t">Kahvaltı kombinasyonu</span><span class="v">+Ekle</span></div>' +
+        '<div class="phone-row"><i>🏋️</i><span class="t">Göğüs & Triceps</span><span class="v">18 set</span></div>' +
+        '<div class="phone-row"><i>💧</i><span class="t">Su hedefi</span><span class="v">3,0 L</span></div>' +
+        '<div class="phone-row"><i>🔥</i><span class="t">Bugün yakılan</span><span class="v">+740</span></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="phone-nav"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>' +
+  '</div></div>';
+}
+function qrLikeHTML(){
+  let cells = '';
+  const pattern = [
+    '111011101','101010101','111011101','001010100','110101011','001101010','111010101','100011101','101110111'
+  ];
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      if (pattern[r][c] === '1') cells += '<rect x="' + (c * 10) + '" y="' + (r * 10) + '" width="10" height="10" fill="#0A0E17"/>';
+    }
+  }
+  return '<svg viewBox="0 0 90 90" aria-hidden="true"><rect width="90" height="90" fill="#fff"/>' + cells + '</svg>';
+}
+function updatePwaButtons(){
+  try {
+    const installed = pwaIsInstalled();
+    $$('.pwa-top-btn').forEach(function(btn) { btn.style.display = installed ? 'none' : ''; });
+    const label = document.getElementById('topInstallBtn');
+    if (label) {
+      const span = label.querySelector('span');
+      if (span) span.textContent = installed ? 'Uygulama Yüklü' : 'Uygulamayı İndir';
+    }
+    if (installed) {
+      const banner = document.getElementById('installBanner');
+      if (banner) banner.classList.remove('show');
+    }
+  } catch(e){}
+}
+function dismissInstallBanner(){
+  try {
+    const el = document.getElementById('installBanner');
+    if (el) el.classList.remove('show');
+    try { sessionStorage.setItem('emirhan_install_dismissed', '1'); } catch(e){}
+  } catch(e){}
+}
+function maybeShowInstallBanner(){
+  try {
+    if (window.innerWidth > 1024) return;
+    if (pwaIsInstalled()) return;
+    try { if (sessionStorage.getItem('emirhan_install_dismissed') === '1') return; } catch(e){}
+    setTimeout(function(){
+      if (pwaIsInstalled()) return;
+      const el = document.getElementById('installBanner');
+      if (el) el.classList.add('show');
+    }, 5200);
+  } catch(e){}
+}
+function copyAppLink(){
+  try {
+    const url = location.origin + location.pathname;
+    const done = function(){ toast('Uygulama bağlantısı kopyalandı. Telefonuna gönderebilirsin.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url); done(); });
+    } else { fallbackCopy(url); done(); }
+  } catch(e){ toast('Bağlantı kopyalanamadı.', 'error'); }
+}
+function fallbackCopy(text){
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  } catch(e){}
+}
+function openInstallGuide(){
+  try {
+    const platform = pwaPlatform();
+    const installed = pwaIsInstalled();
+    const androidSteps = [
+      ['Chrome\'u aç', 'Uygulama adresini Android telefonunda <b style="color:var(--text-2)">Chrome</b> ile aç.'],
+      ['Menüye dokun', 'Sağ üstteki <b style="color:var(--text-2)">üç nokta</b> menüsünü aç.'],
+      ['Uygulamayı yükle', '<b style="color:var(--text-2)">“Uygulamayı yükle”</b> veya <b style="color:var(--text-2)">“Ana ekrana ekle”</b> seçeneğine dokun ve onayla.'],
+      ['Ana ekrandan aç', 'Kurulumdan sonra <b style="color:var(--text-2)">Emirhan Fit</b> simgesiyle tam ekran açılır.']
+    ];
+    const iosSteps = [
+      ['Safari', 'Uygulama adresini iPhone\'da <b style="color:var(--text-2)">Safari</b> ile aç.'],
+      ['Paylaş', 'Alt menüdeki <b style="color:var(--text-2)">Paylaş</b> düğmesine dokun.'],
+      ['Ana Ekrana Ekle', '<b style="color:var(--text-2)">Ana Ekrana Ekle</b> seçeneğini seç ve <b style="color:var(--text-2)">Ekle</b>\'ye dokun.'],
+      ['Aç', 'Ana ekrandaki simgeden uygulamayı tam ekran aç.']
+    ];
+    const list = platform.key === 'ios' ? iosSteps : androidSteps;
+    openModal(
+      '<div class="modal-head"><div><span class="eyebrow" style="color:#9EF2CC">MOBİL KURULUM</span><h3 class="modal-title" style="margin-top:3px">' + ic('download') + ' Emirhan Fit\'i yükle</h3><p class="modal-sub">' + (installed ? 'Uygulama bu cihazda kurulu görünüyor. Ana ekran simgesinden açabilirsin.' : 'Android\'de tarayıcıdan tek dokunuşla kurulur. Uygulama tam ekran açılır ve çevrimdışı çalışır.') + '</p></div><button class="icon-btn" onclick="closeModal()" style="margin-left:auto" aria-label="Kapat">' + ic('x') + '</button></div>' +
+      '<div class="modal-body">' +
+        '<div class="pwa-steps">' + list.map(function(s, i) {
+          return '<div class="pwa-step"><span class="n">' + (i+1) + '</span><div><b>' + esc(s[0]) + '</b><span>' + s[1] + '</span></div></div>';
+        }).join('') + '</div>' +
+        '<div class="pwa-guide-note mt-3">' + ic('info') + ' <b>İstem çıkmadı mı?</b> Uygulama daha önce kurulmuş veya tarayıcı kurulumu desteklemiyor olabilir. Chrome menüsünden “Ana ekrana ekle” seçeneğini dene. Bu sayfa HTTPS üzerinden açıldığında kurulum simgesi otomatik görünür.</div>' +
+        '<div class="pwa-share-row mt-3"><div class="pwa-qr" style="width:80px;height:80px">' + qrLikeHTML() + '</div><div class="link">' + esc(location.origin + location.pathname) + '</div><button class="btn btn-secondary btn-sm" onclick="copyAppLink()">' + ic('copy') + ' Kopyala</button></div>' +
+        '<div class="modal-foot" style="padding:15px 0 0;border:0;background:transparent"><button class="btn btn-secondary" onclick="closeModal()">Kapat</button>' +
+          (installed
+            ? '<button class="btn btn-primary" onclick="closeModal();goTab(\'overview\')">' + ic('check') + ' Ana Ekrandan Açılıyor</button>'
+            : (deferredInstallEvent
+              ? '<button class="btn btn-primary" onclick="closeModal();pwaInstall()">' + ic('download') + ' Kurulumu Başlat</button>'
+              : '<button class="btn btn-primary" onclick="closeModal();goTab(\'app\')">' + ic('info') + ' Kurulum Ekranına Git</button>')) +
+        '</div>' +
+      '</div>',
+      { size:'narrow' }
+    );
+  } catch(e){ toast('Kurulum rehberi açılamadı.', 'error'); }
+}
+async function registerServiceWorker(){
+  try {
+    if (!('serviceWorker' in navigator)) { updatePwaButtons(); return; }
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') { updatePwaButtons(); return; }
+    swRegistration = await navigator.serviceWorker.register('sw.js', { scope: './' });
+    try { await navigator.serviceWorker.ready; } catch(e){}
+    updatePwaButtons();
+    if (UI.tab === 'app') renderAppPage();
+  } catch(e){
+    swRegistration = null;
+  }
+}
+async function pwaUpdate(){
+  try {
+    if (!swRegistration) {
+      await registerServiceWorker();
+    }
+    if (swRegistration && swRegistration.update) {
+      await swRegistration.update();
+      toast('Güncelleme kontrol edildi. Yeni sürüm varsa arka planda hazırlanır.');
+    } else if ('serviceWorker' in navigator) {
+      toast('Çevrimdışı motor bu tarayıcıda etkinleştirilemedi. Sayfayı HTTPS üzerinden açmayı dene.', 'error');
+    } else {
+      toast('Tarayıcı çevrimdışı önbelleği desteklemiyor.', 'error');
+    }
+    if (UI.tab === 'app') renderAppPage();
+  } catch(e){ toast('Güncelleme denetlenemedi.', 'error'); }
+}
+function hideSplash(){
+  try {
+    const el = document.getElementById('pwaSplash');
+    if (!el) return;
+    setTimeout(function(){ el.classList.add('hide'); }, 260);
+    setTimeout(function(){ try { el.remove(); } catch(e){ el.style.display = 'none'; } }, 900);
+  } catch(e){}
+}
+
+/* =========================================================
    BAŞLATMA
    ========================================================= */
 function bindGlobalEvents(){
@@ -6429,9 +6982,19 @@ function init(){
     renderCardioV2();
     renderPrograms();
     renderAI();
+    renderAppPage();
     renderSettings();
-    goTab('overview');
+    const hashTab = (function(){ try { return String(location.hash || '').replace('#',''); } catch(e){ return ''; } })();
+    const startTab = ['workout','nutrition','cardio','programs','ai','app','settings'].indexOf(hashTab) >= 0 ? hashTab : 'overview';
+    goTab(startTab);
+    syncDeferredInstallEvent();
+    registerServiceWorker();
+    hideSplash();
+    maybeShowInstallBanner();
+    window.addEventListener('online', function(){ updatePwaButtons(); if (UI.tab === 'app') renderAppPage(); });
+    window.addEventListener('offline', function(){ updatePwaButtons(); if (UI.tab === 'app') renderAppPage(); });
     setTimeout(function(){ if (state && state.profile) toast('Komuta merkezi hazır, Emirhan. Hedefe ' + fmt1(Math.max(0, state.profile.weight - state.profile.targetWeight)) + ' kg kaldı.'); }, 700);
+    setTimeout(function(){ updatePwaButtons(); }, 1400);
   } catch(e) {
     try {
       state = createDefaultState();
