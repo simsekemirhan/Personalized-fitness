@@ -1,0 +1,51 @@
+{
+  "name": "Emirhan · Fitness Komuta Merkezi",
+  "short_name": "Emirhan Fit",
+  "description": "Emirhan için kişisel fitness, beslenme, kardiyo ve program komuta merkezi. Tamamen çevrimdışı çalışır.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#0A0E17",
+  "theme_color": "#0A0E17",
+  "lang": "tr-TR",
+  "dir": "ltr",
+  "categories": ["health", "fitness", "lifestyle"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Antrenmanı Aç",
+      "short_name": "Antrenman",
+      "url": "./#workout",
+      "description": "Bugünün antrenman planı ve set onayları"
+    },
+    {
+      "name": "Besin Ekle",
+      "short_name": "Beslenme",
+      "url": "./#nutrition",
+      "description": "Hızlı seçim ve kalori kaydı"
+    }
+  ]
+}
