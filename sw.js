@@ -1,10 +1,10 @@
-/* Emirhan Fit · Service Worker
+/* MogFitness · Service Worker
    Uygulama kabuğunu önbelleğe alır; çevrimdışı açılışı destekler.
    Sunucuya kullanıcı verisi gönderilmez. Tüm kayıtlar localStorage'dadır. */
-const VERSION = 'emirhan-fit-v2';
+const VERSION = 'mogfitness-v10';
 const BASE = new URL('./', self.location.href);
 const abs = function (p) { return new URL(p, BASE).href; };
-const SHELL = [abs('./'), abs('index.html'), abs('manifest.webmanifest'), abs('icon.svg')];
+const SHELL = [abs('./'), abs('index.html'), abs('manifest.webmanifest'), abs('icon.svg'), abs('logo-mark.svg')];
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -20,7 +20,7 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
       return Promise.all(keys.filter(function (k) {
-        return k.indexOf('emirhan-fit-') === 0 && k !== VERSION;
+        return k !== VERSION && (k.indexOf('mogfitness-') === 0 || k.indexOf('emirhan-fit-') === 0);
       }).map(function (k) { return caches.delete(k); }));
     }).then(function () { return self.clients.claim(); })
   );
