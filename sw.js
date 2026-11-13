@@ -1,7 +1,7 @@
 /* MogFitness · Service Worker
    Uygulama kabuğunu önbelleğe alır; çevrimdışı açılışı destekler.
    Sunucuya kullanıcı verisi gönderilmez. Tüm kayıtlar localStorage'dadır. */
-const VERSION = 'mogfitness-v10';
+const VERSION = 'mogfitness-v19';
 const BASE = new URL('./', self.location.href);
 const abs = function (p) { return new URL(p, BASE).href; };
 const SHELL = [abs('./'), abs('index.html'), abs('manifest.webmanifest'), abs('icon.svg'), abs('logo-mark.svg')];

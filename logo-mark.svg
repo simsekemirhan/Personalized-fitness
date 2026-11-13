@@ -1,22 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="MogFitness logosu">
   <defs>
     <linearGradient id="blue" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#3A78FF"/>
-      <stop offset=".52" stop-color="#1D4FC4"/>
-      <stop offset="1" stop-color="#0A2268"/>
+      <stop stop-color="#3A78FF"/><stop offset=".52" stop-color="#1D4FC4"/><stop offset="1" stop-color="#0A2268"/>
     </linearGradient>
-    <linearGradient id="bordo" x1="52" y1="48" x2="108" y2="116" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D64A6C"/>
-      <stop offset=".5" stop-color="#A81E42"/>
-      <stop offset="1" stop-color="#6B0E29"/>
+    <linearGradient id="orange" x1="46" y1="46" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD08A"/><stop offset=".45" stop-color="#FF9A3C"/><stop offset="1" stop-color="#FF6A00"/>
     </linearGradient>
   </defs>
   <rect width="160" height="160" rx="38" fill="url(#blue)"/>
   <circle cx="80" cy="80" r="58" fill="none" stroke="#BFD4FF" stroke-opacity=".22" stroke-width="1.4"/>
-  <circle cx="80" cy="80" r="46" fill="none" stroke="#FFD0DB" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 7"/>
-  <g>
-    <text x="80" y="80" fill="url(#bordo)" font-family="Sora, Manrope, Arial, sans-serif" font-size="82" font-weight="800" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">M</text>
-    <text x="80" y="80" fill="none" stroke="#FFD0DB" stroke-opacity=".55" stroke-width=".8" font-family="Sora, Manrope, Arial, sans-serif" font-size="82" font-weight="800" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">M</text>
-  </g>
-  <text x="80" y="133" fill="#DCE9FF" font-family="Sora, Arial, sans-serif" font-size="6.6" font-weight="700" letter-spacing="3.6" text-anchor="middle">FITNESS</text>
+  <circle cx="80" cy="80" r="46" fill="none" stroke="#FFD0A0" stroke-opacity=".2" stroke-width="1" stroke-dasharray="2 7"/>
+  <text x="80" y="80" fill="url(#orange)" font-family="Sora, Manrope, Arial, sans-serif" font-size="84" font-weight="800" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">M</text>
+  <text x="80" y="136" fill="#FFD9B0" font-family="Sora, Arial, sans-serif" font-size="6.6" font-weight="700" letter-spacing="3.6" text-anchor="middle">FITNESS</text>
 </svg>
